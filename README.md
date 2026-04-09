@@ -129,3 +129,211 @@ response should be:
 ```
 Hello World
 ```
+## Deployment on NIFE
+
+Use this link to acces nife dashboard https://launch.nife.io/
+
+Deploy your Spring Boot application using the NIFE UI:
+
+**Source → Build → Resources → Review → Deploy**
+
+---
+
+### Method 1: Docker Image (Recommended)
+
+#### Step 1: Build & Push Image
+
+```bash
+docker build -t hello-world-java .
+docker tag hello-world-java <username>/hello-world-java:latest
+docker push <username>/hello-world-java:latest
+```
+
+---
+
+#### Step 2: Configure in NIFE
+
+* Source → Docker Image
+* Image → `<username>/hello-world-java:latest`
+
+**Ports**
+
+* Internal → `8080`
+* External → `80`
+
+---
+
+#### Step 3: Resources
+
+* Select Region (e.g., `ap-south-1`)
+
+**Recommended**
+
+* CPU → 250m–500m
+* Memory → 512MB–1GB
+* Replicas → 1–2
+
+---
+
+#### Step 4: Deploy
+
+Click **Deploy**
+
+---
+
+### Method 2: Git Repository
+
+#### Step 1: Source
+
+* Select GitHub repository
+* Branch → `main`
+
+---
+
+#### Step 2: Build
+
+* Internal Port → `8080`
+* External Port → `80`
+* Enable **Auto-Dockerize with Runtime**
+
+---
+
+#### Step 3: Security
+
+* SAST
+* SCA
+* Container Scan
+* IaC Scan
+
+---
+
+#### Step 4: Resources & Deploy
+
+* Configure resources
+* Click **Deploy**
+
+---
+
+## Install nifectl CLI (Windows)
+
+### 1. Download
+
+ https://github.com/nifetency/nifectl/releases
+
+Download:
+
+```text
+nifectl-windows-amd64.zip
+```
+
+---
+
+### 2. Extract
+
+* Right-click → Extract All
+* Open folder
+
+---
+
+### 3. Open Terminal
+
+* Type `cmd` in address bar
+
+OR
+
+* Right-click → Open in Terminal
+
+---
+
+### 4. Verify Installation
+
+```bash
+nifectl --help
+```
+
+---
+
+## Deployment using nifectl (CLI)
+
+### Prerequisites
+
+* `nifectl` installed
+* Access to your NIFE organization
+
+---
+
+### Step 1: Login
+
+```bash
+nifectl auth login
+```
+
+---
+
+### Step 2: Initialize Project
+
+```bash
+nifectl init
+```
+
+Follow prompts:
+
+* App Name → auto/manual
+* Organization → select
+* Source → Repository
+* Provider → GitHub
+* Branch → `main`
+
+---
+
+### Step 3: Configure Deployment
+
+* Deployment Type → `Deployment`
+* Resource Type → `CPU`
+* Replicas → `1`
+
+**Ports**
+
+* Internal → `8080`
+* External → `80`
+
+---
+
+### Step 4: Deploy Application
+
+```bash
+nifectl deploy
+```
+
+---
+
+### Step 5: Select Region
+
+* Example:
+
+  * `IND - India, Mumbai`
+  * `my-cluster`
+
+---
+
+### Step 6: Monitor Deployment
+
+* Validating configuration
+* Building application
+* Creating release
+* Deploying
+
+---
+
+### Step 7: Access Application
+
+* A public URL will be generated
+* Open it in your browser
+
+---
+
+### Notes
+
+* Ensure correct port (`8080`)
+* Docker image must be public
+* `nife.toml` stores deployment configuration
