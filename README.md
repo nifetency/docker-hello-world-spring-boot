@@ -1,147 +1,114 @@
-Hello World sample shows how to deploy [SpringBoot](http://projects.spring.io/spring-boot/) RESTful web service application with [Docker](https://www.docker.com/) and with [Kubernetes](https://kubernetes.io/)
+# Docker Hello World Spring Boot
 
-#### Prerequisite 
+A minimal **Spring Boot** sample application for **Docker** and **[Nife.io](https://nife.io)** deployments.
 
-Installed:   
-[Docker](https://www.docker.com/)   
-[git](https://www.digitalocean.com/community/tutorials/how-to-contribute-to-open-source-getting-started-with-git)   
+This repository provides a simple "Hello World" Java application that can be built with Docker, run locally, and deployed as a lightweight sample project on [Nife.io](https://nife.io). It is intended as a practical reference for testing containerized Spring Boot deployments and basic platform onboarding.[1] [2] [3]
 
-Optional:   
-[Docker-Compose](https://docs.docker.com/compose/install/)   
-[Java 1.8 or 11.1](https://www.oracle.com/technetwork/java/javase/overview/index.html)   
-[Maven 3.x](https://maven.apache.org/install.html)
+## Overview
 
+This project is a small **Spring Boot** application designed for straightforward local execution and deployment. It includes a `Dockerfile`, `docker-compose.yml`, Maven configuration, and deployment guidance, which makes it useful as a public sample repository for Java container workflows.[3]
 
-#### Steps
+Because the application is intentionally simple, it works well as a reference example for developers who want to validate Docker-based deployment, test a minimal Java service, or try a sample deployment flow on [Nife.io](https://nife.io).[1]
 
-##### Clone source code from git
+## Features
+
+| Feature | Description |
+| --- | --- |
+| Spring Boot application | Minimal Java application with a simple response endpoint |
+| Docker support | Includes a `Dockerfile` for image build and runtime |
+| Docker Compose support | Includes `docker-compose.yml` for local execution |
+| Maven build | Uses `pom.xml` for dependencies and build configuration |
+| Kubernetes example | Includes an optional Minikube-based deployment flow |
+| Nife.io deployment sample | Suitable as a sample project for [Nife.io](https://nife.io) |
+
+## Tech Stack
+
+| Technology | Purpose |
+| --- | --- |
+| Java | Application runtime |
+| Spring Boot | Web framework |
+| Maven | Build and dependency management |
+| Docker | Container packaging and execution |
+| Docker Compose | Local container orchestration |
+| Nife.io | Deployment platform |
+
+## Prerequisites
+
+Before running this project, make sure the following tools are available.
+
+| Requirement | Notes |
+| --- | --- |
+| Docker | Required for container build and runtime |
+| Git | Required to clone the repository |
+| Java | Optional for non-container local development |
+| Maven | Optional if building outside Docker |
+| Docker Compose | Optional for Compose-based local execution |
+
+## Getting Started
+
+### Clone the repository
+
+```bash
+git clone https://github.com/nifetency/docker-hello-world-spring-boot.git
+cd docker-hello-world-spring-boot
 ```
-git clone https://github.com/dstar55/docker-hello-world-spring-boot .
+
+### Build the Docker image
+
+```bash
+docker build -t hello-world-java .
 ```
 
-##### Build Docker image
-```
-docker build -t="hello-world-java" .
-```
-Maven build will be executes during creation of the docker image.
+The Maven build is executed during the Docker image build process.
 
->Note:if you run this command for first time it will take some time in order to download base image from [DockerHub](https://hub.docker.com/)
+### Run the container
 
-##### Run Docker Container
-```
+```bash
 docker run -p 8080:8080 -it --rm hello-world-java
 ```
 
-##### Test application
+### Test the application
 
-```
-curl localhost:8080
+```bash
+curl http://localhost:8080
 ```
 
-response should be:
-```
+Expected response:
+
+```text
 Hello World
 ```
 
-#####  Stop Docker Container:
-```
-docker stop `docker container ls | grep "hello-world-java:*" | awk '{ print $1 }'`
-```
+## Run with Docker Compose
 
-### Run with docker-compose 
+If you prefer Docker Compose, use the following commands.
 
-Build and start the container by running 
-
-```
-docker-compose up -d 
-```
-
-#### Test application with ***curl*** command
-
-```
-curl localhost:8080
-```
-
-response should be:
-```
-Hello World
-```
-
-##### Stop Docker Container:
-```
+```bash
+docker-compose up -d
+curl http://localhost:8080
 docker-compose down
 ```
 
-### Deploy under the Kuberenetes cluster
+## Optional Kubernetes Example
 
-#### Prerequisite
+This repository can also be used with a local Kubernetes cluster such as Minikube.[3]
 
-##### MiniKube
-
-Installed:
-[MiniKube](https://www.digitalocean.com/community/tutorials/how-to-use-minikube-for-local-kubernetes-development-and-testing)
-
-Start minikube with command:
-```
+```bash
 minikube start
-```
-
-
-#### Retrieve and deploy application
-
-```
 kubectl create deployment hello-spring-boot --image=dstar55/docker-hello-world-spring-boot:latest
-```
-
-#### Expose deployment as a Kubernetes Service
-```
 kubectl expose deployment hello-spring-boot --type=NodePort --port=8080
-```
-
-#### Check whether the service is running
-```
-kubectl get service hello-spring-boot
-```
-
-response should something like:
-```
-NAME                TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)          AGE
-hello-spring-boot   NodePort   xx.xx.xxx.xxx   <none>        8080:xxxxx/TCP   59m
-```
-
-#### Retrieve URL for application(hello-spring-boot)
-```
 minikube service hello-spring-boot --url
 ```
 
-response will be http..., e.g:
-```
-http://127.0.0.1:44963
-```
+After the service URL is generated, test it with `curl`.
 
-#### Test application with ***curl*** command(note: port is randomly created)
+## Deploy on Nife.io
 
-```
-curl 127.0.0.1:44963
-```
+You can deploy this application on [Nife.io](https://nife.io) either from a Docker image or directly from the Git repository.[1] [2]
 
-response should be:
-```
-Hello World
-```
-## Deployment on NIFE
+### Option 1: Deploy from a Docker image
 
-Use this link to acces nife dashboard https://launch.nife.io/
-
-Deploy your Spring Boot application using the NIFE UI:
-
-**Source → Build → Resources → Review → Deploy**
-
----
-
-### Method 1: Docker Image (Recommended)
-
-#### Step 1: Build & Push Image
+First, build and push the image to a container registry.
 
 ```bash
 docker build -t hello-world-java .
@@ -149,169 +116,84 @@ docker tag hello-world-java <username>/hello-world-java:latest
 docker push <username>/hello-world-java:latest
 ```
 
----
+Then create a new application in Nife.io using the following settings.
 
-#### Step 2: Configure in NIFE
+| Setting | Value |
+| --- | --- |
+| Source | Docker Image |
+| Image | `<username>/hello-world-java:latest` |
+| Internal Port | `8080` |
+| External Port | `80` |
+| Suggested Replicas | `1` |
+| Suggested Memory | `512MB` to `1GB` |
+| Suggested CPU | `250m` to `500m` |
 
-* Source → Docker Image
-* Image → `<username>/hello-world-java:latest`
+### Option 2: Deploy from the Git repository
 
-**Ports**
+You can also deploy directly from GitHub.
 
-* Internal → `8080`
-* External → `80`
+| Setting | Value |
+| --- | --- |
+| Source | Git Repository |
+| Provider | GitHub |
+| Repository | `nifetency/docker-hello-world-spring-boot` |
+| Branch | `master` |
+| Internal Port | `8080` |
+| External Port | `80` |
+| Build Mode | Auto-Dockerize with runtime |
 
----
+### Option 3: Deploy with `nifectl`
 
-#### Step 3: Resources
-
-* Select Region (e.g., `ap-south-1`)
-
-**Recommended**
-
-* CPU → 250m–500m
-* Memory → 512MB–1GB
-* Replicas → 1–2
-
----
-
-#### Step 4: Deploy
-
-Click **Deploy**
-
----
-
-### Method 2: Git Repository
-
-#### Step 1: Source
-
-* Select GitHub repository
-* Branch → `main`
-
----
-
-#### Step 2: Build
-
-* Internal Port → `8080`
-* External Port → `80`
-* Enable **Auto-Dockerize with Runtime**
-
----
-
-#### Step 3: Security
-
-* SAST
-* SCA
-* Container Scan
-* IaC Scan
-
----
-
-#### Step 4: Resources & Deploy
-
-* Configure resources
-* Click **Deploy**
-
----
-
-## Install nifectl CLI (Windows)
-
-#### Step 1: Download nifectl
-
-https://docs.nife.io/Quick-Start/Nifectl
-
----
-
-#### Step 2: Open Terminal
-
-* Type `cmd` in the address bar
-  or
-* Right-click and select **Open in Terminal**
-
----
-
-#### Step 3: Verify Installation
-
-```bash
-nifectl --help
-```
-
----
-
-### Deployment Steps
-
-### Step 1: Login
+If you prefer the CLI workflow, use the following commands.
 
 ```bash
 nifectl auth login
-```
-
----
-
-### Step 2: Initialize Project
-
-```bash
 nifectl init
-```
-
-Follow prompts:
-
-* App Name → auto/manual
-* Organization → select
-* Source → Repository
-* Provider → GitHub
-* Branch → `main`
-
----
-
-### Step 3: Configure Deployment
-
-* Deployment Type → `Deployment`
-* Resource Type → `CPU`
-* Replicas → `1`
-
-**Ports**
-
-* Internal → `8080`
-* External → `80`
-
----
-
-### Step 4: Deploy Application
-
-```bash
 nifectl deploy
 ```
 
----
+For the full CLI setup, see the [Nifectl Quick Start documentation](https://docs.nife.io/Quick-Start/Nifectl).[2]
 
-### Step 5: Select Region
+## Repository Structure
 
-* Example:
+| Path | Purpose |
+| --- | --- |
+| `src/` | Java source code and tests |
+| `Dockerfile` | Container build instructions |
+| `docker-compose.yml` | Compose-based local workflow |
+| `pom.xml` | Maven project configuration |
+| `Jenkinsfile` | CI pipeline example |
+| `.gitlab-ci.yml` | Additional CI configuration |
 
-  * `IND - India, Mumbai`
-  * `my-cluster`
+## Configuration Notes
 
----
+| Item | Value |
+| --- | --- |
+| Application port | `8080` |
+| Main build file | `pom.xml` |
+| Default branch | `master` |
+| License | `MIT` |
 
-### Step 6: Monitor Deployment
+## Troubleshooting
 
-* Validating configuration
-* Building application
-* Creating release
-* Deploying
+| Issue | Suggested fix |
+| --- | --- |
+| Port `8080` is already in use | Stop the conflicting service or change the host port mapping |
+| Docker build fails | Confirm Docker is running and rebuild the image |
+| Application does not respond | Check the container logs and confirm the app is bound to `8080` |
+| Registry push fails | Verify container registry authentication and image name |
+| Nife.io deployment fails | Recheck source selection, port configuration, and deployment logs |
 
----
+## Acknowledgements
 
-### Step 7: Access Application
+This repository is based on the original [`dstar55/docker-hello-world-spring-boot`](https://github.com/dstar55/docker-hello-world-spring-boot) project and has been adapted by **Nifetency** as a sample deployment repository for [Nife.io](https://nife.io).[3]
 
-* A public URL will be generated
-* Open it in your browser
+## License
 
----
+This project is licensed under the **MIT License**. See the `LICENSE` file for details.
 
-### Notes
+## References
 
-* Ensure correct port (`8080`)
-* Docker image must be public
-* `nife.toml` stores deployment configuration
+[1]: https://nife.io "Nife.io"
+[2]: https://docs.nife.io/Quick-Start/Nifectl "Nifectl Quick Start"
+[3]: https://github.com/nifetency/docker-hello-world-spring-boot "nifetency/docker-hello-world-spring-boot"
