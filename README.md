@@ -10,6 +10,20 @@ This project is a small **Spring Boot** application designed for straightforward
 
 Because the application is intentionally simple, it works well as a reference example for developers who want to validate Docker-based deployment, test a minimal Java service, or try a sample deployment flow on [Nife.io](https://nife.io).[1]
 
+<div align="center">
+
+### Deploy this project instantly with **NIFE OneClick**
+
+<a href="https://launch.nife.io/deploy-app/start?repository-url=https://github.com/nifetency/docker-hello-world-spring-boot">
+  <img
+    src="https://launch.nife.io/deploy-on-nife.svg"
+    alt="Deploy on NIFE"
+    width="320"
+  />
+</a>
+
+</div>
+
 ## Features
 
 | Feature | Description |
@@ -153,14 +167,6 @@ nifectl deploy
 ```
 
 For the full CLI setup, see the [Nifectl Quick Start documentation](https://docs.nife.io/Quick-Start/Nifectl).[2]
-
-## Option 4: Deploy on NIFE OneClick
-
-Launch your own instance of **docker-hello-world-spring-boot** with a single click.
-
-### Deploy as Application
-
-[![Deploy on NIFE](https://launch.nife.io/deploy-on-nife.svg)](https://launch.nife.io/deploy-app/start?repository-url=https://github.com/nifetency/docker-hello-world-spring-boot)
 
 ## Repository Structure
 
