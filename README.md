@@ -154,6 +154,14 @@ nifectl deploy
 
 For the full CLI setup, see the [Nifectl Quick Start documentation](https://docs.nife.io/Quick-Start/Nifectl).[2]
 
+## Option 4: Deploy on NIFE OneClick
+
+Launch your own instance of **docker-hello-world-spring-boot** with a single click.
+
+### Deploy as Application
+
+[![Deploy App on OneClick](https://img.shields.io/badge/🚀%20Deploy%20App%20on%20OneClick-6C2CF5?style=for-the-badge)](https://launch.nife.io/deploy-app/start?repository-url=https://github.com/nifetency/docker-hello-world-spring-boot)
+
 ## Repository Structure
 
 | Path | Purpose |
