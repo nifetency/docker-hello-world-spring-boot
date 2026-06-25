@@ -15,14 +15,13 @@ Because the application is intentionally simple, it works well as a reference ex
 
 <div align="center">
 
-### Deploy this project instantly  
-
+<h3><u><strong>Deploy this project instantly</strong></u></h3>
 
 <a href="https://launch.nife.io/deploy-app/start?repository-url=https://github.com/nifetency/docker-hello-world-spring-boot">
   <img
     src="https://launch.nife.io/deploy-on-nife.svg"
     alt="Deploy on NIFE"
-    width="320"
+    width="300"
   />
 </a>
 
