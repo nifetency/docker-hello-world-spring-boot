@@ -18,7 +18,7 @@ Because the application is intentionally simple, it works well as a reference ex
   <img
     src="https://launch.nife.io/deploy-on-nife.svg"
     alt="Deploy on NIFE"
-    width="320"
+    width="300"
   />
 </a>
 
