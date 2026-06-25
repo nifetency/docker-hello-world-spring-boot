@@ -11,7 +11,8 @@
 </a>
 
 </div>
-# Docker Hello World Spring Boot
+
+## Docker Hello World Spring Boot
 
 A minimal **Spring Boot** sample application for **Docker** and **[Nife.io](https://nife.io)** deployments.
 
