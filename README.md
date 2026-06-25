@@ -15,7 +15,7 @@ Because the application is intentionally simple, it works well as a reference ex
 
 <div align="center">
 
-<u> ### Deploy this project instantly </u> 
+### Deploy this project instantly  
 
 
 <a href="https://launch.nife.io/deploy-app/start?repository-url=https://github.com/nifetency/docker-hello-world-spring-boot">
