@@ -1,15 +1,16 @@
-<p align="center">
-  <h3><b><u>Deploy this project instantly</u></b></h3>
-  
-  <a href="https://launch.nife.io/deploy-app/start?repository-url=https://github.com/nifetency/docker-hello-world-spring-boot">
-    <img
-      src="https://launch.nife.io/deploy-on-nife.svg"
-      alt="Deploy on NIFE"
-      width="280"
-    />
-  </a>
-</p>
+<div align="center">
 
+<h3><b><u>Deploy this project instantly</u></b></h3>
+
+<a href="https://launch.nife.io/deploy-app/start?repository-url=https://github.com/nifetency/docker-hello-world-spring-boot">
+  <img
+    src="https://launch.nife.io/deploy-on-nife.svg"
+    alt="Deploy on NIFE"
+    width="280"
+  />
+</a>
+
+</div>
 # Docker Hello World Spring Boot
 
 A minimal **Spring Boot** sample application for **Docker** and **[Nife.io](https://nife.io)** deployments.
